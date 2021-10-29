@@ -23,31 +23,31 @@ jobs:
     displayName: 'update apt and install build tool'
 
   - script: |
-      sudo ./pkgdep.sh
+      ./pkgdep.sh
     workingDirectory: $(System.DefaultWorkingDirectory)/script
     displayName: 'Download required packages'
 
   - script: |
-      sudo ./build_lib.sh
+      ./build_lib.sh
     workingDirectory: $(System.DefaultWorkingDirectory)/lib
     displayName: 'Build dependent libraries'
 
   - script: |
-      sudo ./configure
+      ./configure
     workingDirectory: $(System.DefaultWorkingDirectory)/
     displayName: 'Configure src'
 
   - script: |
-      sudo make
+      make
     workingDirectory: $(System.DefaultWorkingDirectory)/
     displayName: 'Build src'
     
   - script: |
-      sudo cmake .
+      cmake .
     workingDirectory: $(System.DefaultWorkingDirectory)/test
     displayName: 'Configure test'
 
   - script: |
-      sudo make
+      make
     workingDirectory: $(System.DefaultWorkingDirectory)/test
     displayName: 'Build test'
