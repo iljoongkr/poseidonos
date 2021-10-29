@@ -2,6 +2,7 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+# pre-defined variables: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
 
 trigger:
 - none
@@ -10,10 +11,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: |
+    sudo apt-get update
+    sudo apt-get install -y build-essential python wget libssl-dev libaio-dev vim git --fix-missing
+  displayName: 'update apt and install build tool'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo SourcesDirectory: ${{Build.SourcesDirectory}}
+  displayName: 'echo source directory'
+
+- script: |
+    sudo ./pkgdep.sh
+  workingDirectory: $(Build.SourcesDirectory)/script
+  displayName: 'Download required packages'
+
+- script: |
+    sudo ./build_lib.sh
+  workingDirectory: $(Build.SourcesDirectory)/lib
+  displayName: 'Download required packages'
