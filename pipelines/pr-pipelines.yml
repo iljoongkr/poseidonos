@@ -10,6 +10,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  BUILD_TYPE: Release
+
 steps:
 - script: |
     sudo apt-get update
@@ -25,3 +28,23 @@ steps:
     sudo ./build_lib.sh
   workingDirectory: $(System.DefaultWorkingDirectory)/lib
   displayName: 'Build dependent libraries'
+
+- script: |
+    sudo ./configure
+  workingDirectory: $(System.DefaultWorkingDirectory)/
+  displayName: 'Configure src'
+
+- script: |
+    sudo make -j 4
+  workingDirectory: $(System.DefaultWorkingDirectory)/
+  displayName: 'Build src'
+  
+- script: |
+    sudo cmake .
+  workingDirectory: $(System.DefaultWorkingDirectory)/test
+  displayName: 'Configure test'
+
+- script: |
+    sudo make -j 4
+  workingDirectory: $(System.DefaultWorkingDirectory)/test
+  displayName: 'Build test'
