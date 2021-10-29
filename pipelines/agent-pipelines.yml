@@ -38,7 +38,7 @@ jobs:
     displayName: 'Configure src'
 
   - script: |
-      sudo make
+      sudo make -j 8
     workingDirectory: $(System.DefaultWorkingDirectory)/
     displayName: 'Build src'
     
@@ -48,7 +48,7 @@ jobs:
     displayName: 'Configure test'
 
   - script: |
-      sudo make
+      sudo make -j 8
     workingDirectory: $(System.DefaultWorkingDirectory)/test
     displayName: 'Build test'
 
