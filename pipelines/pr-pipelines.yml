@@ -17,15 +17,15 @@ steps:
   displayName: 'update apt and install build tool'
 
 - script: |
-    echo SourcesDirectory: ${{Build.SourcesDirectory}}
+    echo SourcesDirectory: ${{Pipeline.Workspace}}
   displayName: 'echo source directory'
 
 - script: |
     sudo ./pkgdep.sh
-  workingDirectory: $(Build.SourcesDirectory)/script
+  workingDirectory: $(Pipeline.Workspace)/script
   displayName: 'Download required packages'
 
 - script: |
     sudo ./build_lib.sh
-  workingDirectory: $(Build.SourcesDirectory)/lib
+  workingDirectory: $(Pipeline.Workspace)/lib
   displayName: 'Download required packages'
