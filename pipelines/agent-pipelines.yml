@@ -28,26 +28,26 @@ jobs:
     displayName: 'Download required packages'
 
   - script: |
-      ./build_lib.sh
+      sudo ./build_lib.sh
     workingDirectory: $(System.DefaultWorkingDirectory)/lib
     displayName: 'Build dependent libraries'
 
   - script: |
-      ./configure
+      sudo ./configure
     workingDirectory: $(System.DefaultWorkingDirectory)/
     displayName: 'Configure src'
 
   - script: |
-      make
+      sudo make
     workingDirectory: $(System.DefaultWorkingDirectory)/
     displayName: 'Build src'
     
   - script: |
-      cmake .
+      sudo cmake .
     workingDirectory: $(System.DefaultWorkingDirectory)/test
     displayName: 'Configure test'
 
   - script: |
-      make
+      sudo make
     workingDirectory: $(System.DefaultWorkingDirectory)/test
     displayName: 'Build test'
