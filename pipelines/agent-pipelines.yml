@@ -23,7 +23,7 @@ jobs:
     displayName: 'update apt and install build tool'
 
   - script: |
-      ./pkgdep.sh
+      sudo ./pkgdep.sh
     workingDirectory: $(System.DefaultWorkingDirectory)/script
     displayName: 'Download required packages'
 
