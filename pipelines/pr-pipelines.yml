@@ -18,10 +18,10 @@ steps:
 
 - script: |
     sudo ./pkgdep.sh
-  workingDirectory: $(Pipeline.Workspace)/script
+  workingDirectory: $(System.DefaultWorkingDirectory)/script
   displayName: 'Download required packages'
 
 - script: |
     sudo ./build_lib.sh
-  workingDirectory: $(Pipeline.Workspace)/lib
-  displayName: 'Download required packages'
+  workingDirectory: $(System.DefaultWorkingDirectory)/lib
+  displayName: 'Build dependent libraries'
