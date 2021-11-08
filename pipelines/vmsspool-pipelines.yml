@@ -1,0 +1,58 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+# pre-defined variables: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
+# timeout: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/phases?view=azure-devops&tabs=yaml#timeouts
+
+trigger:
+- none
+
+pool: vmsspool
+
+variables:
+  BUILD_TYPE: Release
+
+jobs:
+- job: build
+  timeoutInMinutes: 0
+  steps:
+  - script: |
+      sudo apt-get update
+      sudo apt-get install -y build-essential python wget libssl-dev libaio-dev vim git --fix-missing
+    displayName: 'update apt and install build tool'
+
+  - script: |
+      sudo ./pkgdep.sh
+    workingDirectory: $(System.DefaultWorkingDirectory)/script
+    displayName: 'Download required packages'
+
+  - script: |
+      sudo ./build_lib.sh
+    workingDirectory: $(System.DefaultWorkingDirectory)/lib
+    displayName: 'Build dependent libraries'
+
+  - script: |
+      sudo ./configure
+    workingDirectory: $(System.DefaultWorkingDirectory)/
+    displayName: 'Configure src'
+
+  - script: |
+      sudo make -j 8
+    workingDirectory: $(System.DefaultWorkingDirectory)/
+    displayName: 'Build src'
+    
+  - script: |
+      sudo cmake .
+    workingDirectory: $(System.DefaultWorkingDirectory)/test
+    displayName: 'Configure test'
+
+  - script: |
+      sudo make -j 8
+    workingDirectory: $(System.DefaultWorkingDirectory)/test
+    displayName: 'Build test'
+
+  - script: |
+      sudo rm -fr *
+    workingDirectory: $(System.DefaultWorkingDirectory)/
+    displayName: 'Clean up'
