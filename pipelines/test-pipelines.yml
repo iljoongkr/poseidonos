@@ -16,7 +16,7 @@ variables:
 steps:
 - script: |
     echo 'bloburl = $(bloburl)'
-    echo 'blobcontanier = $(container)
+    echo 'bloburl2 = $(azure-group_bloburl)
   displayName: 'variables test'
 
 - script: |
