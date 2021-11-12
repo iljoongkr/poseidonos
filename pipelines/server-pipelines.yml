@@ -18,5 +18,5 @@ jobs:
   pool: Server
   steps:
   - script: |
-      echo 'bloburl = $(bloburl)''
+      echo 'bloburl = $(bloburl)'
     displayName: 'variables test'
