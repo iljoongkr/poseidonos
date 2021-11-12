@@ -8,6 +8,8 @@ trigger:
 
 variables:
   - group: azure
+  - name: bloburl
+    value: "http://test"
 
 # Delay
 # Delay further execution of a workflow by a fixed time
