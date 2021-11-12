@@ -7,8 +7,7 @@ trigger:
 - none
 
 variables:
-  group: azure
-  system_debug: true
+  - group: azure
 
 # Delay
 # Delay further execution of a workflow by a fixed time
