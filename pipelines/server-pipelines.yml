@@ -16,6 +16,6 @@ jobs:
   pool: Server
   steps:
   - script: |
-      echo '1. bloburl = ${{bloburl}}'
+      echo '1. bloburl = ${{ bloburl }}'
       echo "2. bloburl = $(bloburl)"
     displayName: 'variables test'
