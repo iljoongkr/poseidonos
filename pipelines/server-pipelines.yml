@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+variables:
+  group: azure
+  system_debug: true
+
+# Delay
+# Delay further execution of a workflow by a fixed time
+jobs:
+- job: RunsOnServer
+  pool: Server
+  steps:
+  - script: |
+      echo '1. bloburl = ${{bloburl}}'
+      echo "2. bloburl = $(bloburl)"
+    displayName: 'variables test'
