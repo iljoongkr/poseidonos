@@ -8,7 +8,7 @@
 trigger:
 - none
 
-pool: vmsspool
+pool: agentpool
 
 variables:
   BUILD_TYPE: Release
