@@ -10,13 +10,12 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  group: azure-group
+  group: azure
   system_debug: true
 
 steps:
 - script: |
     echo 'bloburl = $(bloburl)'
-    echo 'bloburl2 = $(azure-group_bloburl)
   displayName: 'variables test'
 
 - script: |
